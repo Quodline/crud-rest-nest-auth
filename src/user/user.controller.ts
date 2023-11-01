@@ -3,8 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
   Patch,
   UseGuards,
@@ -12,7 +10,7 @@ import {
 import { User } from '@prisma/client';
 import { JwtGuard } from '../auth/guard';
 import { GetUser } from '../auth/decorator';
-import { UpdateBodyDto, IdParamDto } from './dto';
+import { IdParamDto, UpdateBodyDto } from './dto';
 import { UserService } from './user.service';
 
 @UseGuards(JwtGuard)
