@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   UseGuards,
@@ -24,12 +26,14 @@ export class UserController {
   }
 
   @Patch(':id')
-  updateName(@Param() { id }: IdParamDto, @Body() body: UpdateBodyDto) {
-    return this.userService.updateUser(+id, body);
+  async updateName(@Param() { id }: IdParamDto, @Body() body: UpdateBodyDto) {
+    const { pass, ...user } = await this.userService.updateUser(+id, body);
+    return user;
   }
 
   @Delete(':id')
-  delete(@Param() { id }: IdParamDto) {
-    return this.userService.deleteUser(+id);
+  async delete(@Param() { id }: IdParamDto) {
+    const { pass, ...deletedUser } = await this.userService.deleteUser(+id);
+    return deletedUser;
   }
 }

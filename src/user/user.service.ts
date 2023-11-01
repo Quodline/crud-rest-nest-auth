@@ -9,12 +9,10 @@ export class UserService {
 
   async updateUser(id: number, body: UpdateBodyDto) {
     try {
-      const { pass, ...user } = await this.prisma.user.update({
+      return this.prisma.user.update({
         where: { id },
         data: body,
       });
-
-      return user;
     } catch (error) {
       throw error instanceof Prisma.PrismaClientKnownRequestError
         ? new NotFoundException('User not found')
@@ -23,10 +21,8 @@ export class UserService {
   }
 
   async deleteUser(id: number) {
-    await this.prisma.user.delete({
+    return this.prisma.user.delete({
       where: { id },
     });
-
-    return {};
   }
 }
